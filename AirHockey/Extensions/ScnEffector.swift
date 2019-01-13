@@ -50,6 +50,14 @@ extension ScnEffector {
         
     }
     
+    func scaleDown(_ node: SCNNode, _ time: TimeInterval){
+        
+        let scaleDown = SCNAction.scale(to: 0, duration: time)
+        let die = SCNAction.removeFromParentNode()
+        node.runAction(SCNAction.sequence([scaleDown,die]))
+        
+    }
+    
     func waitFadeOutDie(_ node: SCNNode, _ time1: TimeInterval, _ time2: TimeInterval, _ key: String = ""){
         
         let wait = SCNAction.wait(duration: time1)

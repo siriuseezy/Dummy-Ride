@@ -20,10 +20,17 @@
 		0D27109B21C5A332002C79C1 /* normalka.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D27109A21C5A331002C79C1 /* normalka.png */; };
 		0D42CA8F2100AA92006BDA5E /* Road.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D42CA8E2100AA92006BDA5E /* Road.swift */; };
 		0D42CA912100AEEF006BDA5E /* Randomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D42CA902100AEEF006BDA5E /* Randomizator.swift */; };
+		0D90979E21C6D60B00DF308F /* SceneKit Particle System.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 0D90979C21C6D60B00DF308F /* SceneKit Particle System.scnp */; };
+		0D90979F21C6D60B00DF308F /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D90979D21C6D60B00DF308F /* star.png */; };
 		0D920AC92189BFB3001B4899 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D920AC82189BFB3001B4899 /* Constants.swift */; };
 		0D920AD02189C948001B4899 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D920ACE2189C948001B4899 /* spark.png */; };
 		0D9AF36B20FE34FF009BF817 /* PhysicsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9AF36A20FE34FF009BF817 /* PhysicsCreator.swift */; };
+		0DBB234C21C905EB0022ECCB /* finger.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB234B21C905EB0022ECCB /* finger.png */; };
+		0DBB235021C912DD0022ECCB /* fireWorks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB234E21C912DD0022ECCB /* fireWorks.sks */; };
+		0DBB235121C912DD0022ECCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB234F21C912DD0022ECCB /* Assets.xcassets */; };
 		0DCCB50E20F87FEB00396A27 /* ScnEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCCB50D20F87FEB00396A27 /* ScnEffector.swift */; };
+		0DD44B8421C93118007F00D0 /* SF Atarian System.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DD44B8221C93118007F00D0 /* SF Atarian System.ttf */; };
+		0DD44B8521C93118007F00D0 /* SF Atarian System Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DD44B8321C93118007F00D0 /* SF Atarian System Bold.ttf */; };
 		0DE10DC02108660B00D94756 /* RoadCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE10DBF2108660B00D94756 /* RoadCamera.swift */; };
 		0DE38E9F20D10220002B9174 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE38E9E20D10220002B9174 /* AppDelegate.swift */; };
 		0DE38EA120D10220002B9174 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE38EA020D10220002B9174 /* art.scnassets */; };
@@ -39,6 +46,15 @@
 		0DE3FB6B210727EE006B06A5 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE3FB6A210727EE006B06A5 /* MainMenu.swift */; };
 		0DE3FB6D2107347A006B06A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE3FB6C2107347A006B06A5 /* User.swift */; };
 		0DE3FB6F210746A2006B06A5 /* SkEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE3FB6E210746A2006B06A5 /* SkEffector.swift */; };
+		0DE9815D21CBEA24003F2FEF /* libGameAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE9815C21CBEA24003F2FEF /* libGameAnalytics.a */; };
+		0DE9816021CBEA40003F2FEF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE9815F21CBEA40003F2FEF /* libsqlite3.tbd */; };
+		0DE9816221CBEA4A003F2FEF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE9816121CBEA4A003F2FEF /* libz.tbd */; };
+		0DE9816421CBEA57003F2FEF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE9816321CBEA57003F2FEF /* AdSupport.framework */; };
+		0DE9816621CBEA60003F2FEF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE9816521CBEA60003F2FEF /* SystemConfiguration.framework */; };
+		0DF71BBD21CAA3A10090C286 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF71BBC21CAA3A10090C286 /* Tutorial.swift */; };
+		6C22AD38FA81C599C250BC94 /* Pods_Skeleton_RideUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233AC188E2B2423D2046499F /* Pods_Skeleton_RideUITests.framework */; };
+		9347341377BEA3DC0AC0CC49 /* Pods_Skeleton_RideTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE01ECC3E1C39895889ACFF /* Pods_Skeleton_RideTests.framework */; };
+		D3751DFA0C97B0FA78FD34AC /* Pods_Skeleton_Ride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EF1D37FF7498A380B13B31 /* Pods_Skeleton_Ride.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07EF1D37FF7498A380B13B31 /* Pods_Skeleton_Ride.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skeleton_Ride.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D04B01921C0133600DCBC3E /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		0D04B01B21C0471200DCBC3E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		0D145D5221C15A3600F19B45 /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
@@ -72,10 +89,17 @@
 		0D27109A21C5A331002C79C1 /* normalka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalka.png; sourceTree = "<group>"; };
 		0D42CA8E2100AA92006BDA5E /* Road.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Road.swift; sourceTree = "<group>"; };
 		0D42CA902100AEEF006BDA5E /* Randomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizator.swift; sourceTree = "<group>"; };
+		0D90979C21C6D60B00DF308F /* SceneKit Particle System.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "SceneKit Particle System.scnp"; sourceTree = "<group>"; };
+		0D90979D21C6D60B00DF308F /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		0D920AC82189BFB3001B4899 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0D920ACE2189C948001B4899 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		0D9AF36A20FE34FF009BF817 /* PhysicsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCreator.swift; sourceTree = "<group>"; };
+		0DBB234B21C905EB0022ECCB /* finger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finger.png; sourceTree = "<group>"; };
+		0DBB234E21C912DD0022ECCB /* fireWorks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireWorks.sks; sourceTree = "<group>"; };
+		0DBB234F21C912DD0022ECCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DCCB50D20F87FEB00396A27 /* ScnEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScnEffector.swift; sourceTree = "<group>"; };
+		0DD44B8221C93118007F00D0 /* SF Atarian System.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF Atarian System.ttf"; sourceTree = "<group>"; };
+		0DD44B8321C93118007F00D0 /* SF Atarian System Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF Atarian System Bold.ttf"; sourceTree = "<group>"; };
 		0DE10DBF2108660B00D94756 /* RoadCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadCamera.swift; sourceTree = "<group>"; };
 		0DE38E9B20D10220002B9174 /* Skeleton Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Skeleton Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DE38E9E20D10220002B9174 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +121,22 @@
 		0DE3FB6A210727EE006B06A5 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		0DE3FB6C2107347A006B06A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0DE3FB6E210746A2006B06A5 /* SkEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkEffector.swift; sourceTree = "<group>"; };
+		0DE9815B21CBEA23003F2FEF /* GameAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameAnalytics.h; sourceTree = "<group>"; };
+		0DE9815C21CBEA24003F2FEF /* libGameAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGameAnalytics.a; sourceTree = "<group>"; };
+		0DE9815F21CBEA40003F2FEF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		0DE9816121CBEA4A003F2FEF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0DE9816321CBEA57003F2FEF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		0DE9816521CBEA60003F2FEF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0DE9816721CBEAAC003F2FEF /* GameAnalytics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameAnalytics-Bridging-Header.h"; sourceTree = "<group>"; };
+		0DF71BBC21CAA3A10090C286 /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
+		0E171052121A95EBC0C20E00 /* Pods-Skeleton Ride.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skeleton Ride.release.xcconfig"; path = "Pods/Target Support Files/Pods-Skeleton Ride/Pods-Skeleton Ride.release.xcconfig"; sourceTree = "<group>"; };
+		233AC188E2B2423D2046499F /* Pods_Skeleton_RideUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skeleton_RideUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27EAD46B0319F18C0FD74E39 /* Pods-Skeleton RideTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skeleton RideTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Skeleton RideTests/Pods-Skeleton RideTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2DE01ECC3E1C39895889ACFF /* Pods_Skeleton_RideTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skeleton_RideTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		326211970885D0F694670048 /* Pods-Skeleton Ride.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skeleton Ride.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Skeleton Ride/Pods-Skeleton Ride.debug.xcconfig"; sourceTree = "<group>"; };
+		5557A28ABE074DB90867C048 /* Pods-Skeleton RideUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skeleton RideUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Skeleton RideUITests/Pods-Skeleton RideUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B2916AC974C6DA6809537B52 /* Pods-Skeleton RideTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skeleton RideTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Skeleton RideTests/Pods-Skeleton RideTests.release.xcconfig"; sourceTree = "<group>"; };
+		F014B3E5B96305E366A9D3D3 /* Pods-Skeleton RideUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skeleton RideUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Skeleton RideUITests/Pods-Skeleton RideUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +144,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DE9816621CBEA60003F2FEF /* SystemConfiguration.framework in Frameworks */,
+				0DE9816421CBEA57003F2FEF /* AdSupport.framework in Frameworks */,
+				0DE9816221CBEA4A003F2FEF /* libz.tbd in Frameworks */,
+				0DE9816021CBEA40003F2FEF /* libsqlite3.tbd in Frameworks */,
+				0DE9815D21CBEA24003F2FEF /* libGameAnalytics.a in Frameworks */,
+				D3751DFA0C97B0FA78FD34AC /* Pods_Skeleton_Ride.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9347341377BEA3DC0AC0CC49 /* Pods_Skeleton_RideTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C22AD38FA81C599C250BC94 /* Pods_Skeleton_RideUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,8 +200,11 @@
 		0DA5B8B320FE157200E68313 /* 2D */ = {
 			isa = PBXGroup;
 			children = (
+				0DBB234D21C905F80022ECCB /* Images */,
 				0DE38ECE20D16EEA002B9174 /* Touch.swift */,
 				0DE3FB6A210727EE006B06A5 /* MainMenu.swift */,
+				0DBB234E21C912DD0022ECCB /* fireWorks.sks */,
+				0DBB234F21C912DD0022ECCB /* Assets.xcassets */,
 			);
 			path = 2D;
 			sourceTree = "<group>";
@@ -166,8 +217,18 @@
 				0DE38ED020D1AC3A002B9174 /* PhysicsDelegate.swift */,
 				0DE38E9E20D10220002B9174 /* AppDelegate.swift */,
 				0DE3FB662107150C006B06A5 /* Figurine.swift */,
+				0D90979C21C6D60B00DF308F /* SceneKit Particle System.scnp */,
+				0D90979D21C6D60B00DF308F /* star.png */,
 			);
 			path = 3D;
+			sourceTree = "<group>";
+		};
+		0DBB234D21C905F80022ECCB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0DBB234B21C905EB0022ECCB /* finger.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		0DCCB50C20F87FD300396A27 /* Extensions */ = {
@@ -183,13 +244,26 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0DD44B8121C930F7007F00D0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0DD44B8321C93118007F00D0 /* SF Atarian System Bold.ttf */,
+				0DD44B8221C93118007F00D0 /* SF Atarian System.ttf */,
+			);
+			name = Fonts;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		0DE38E9220D10220002B9174 = {
 			isa = PBXGroup;
 			children = (
+				0DE9816721CBEAAC003F2FEF /* GameAnalytics-Bridging-Header.h */,
 				0DE38E9D20D10220002B9174 /* AirHockey */,
 				0DE38EB420D10224002B9174 /* AirHockeyTests */,
 				0DE38EBF20D10224002B9174 /* AirHockeyUITests */,
 				0DE38E9C20D10220002B9174 /* Products */,
+				0DE9815E21CBEA40003F2FEF /* Frameworks */,
+				234CD9E59ABC89C5D9C49E97 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,6 +280,8 @@
 		0DE38E9D20D10220002B9174 /* AirHockey */ = {
 			isa = PBXGroup;
 			children = (
+				0DE9815721CBE9E9003F2FEF /* GameAnalytics */,
+				0DD44B8121C930F7007F00D0 /* Fonts */,
 				0D920AC72189BFA4001B4899 /* Shared */,
 				0DE3FB7021076820006B06A5 /* Road */,
 				0DA5B8B420FE158100E68313 /* 3D */,
@@ -244,8 +320,45 @@
 				0D42CA8E2100AA92006BDA5E /* Road.swift */,
 				0DE10DBF2108660B00D94756 /* RoadCamera.swift */,
 				0D04B01921C0133600DCBC3E /* Level.swift */,
+				0DF71BBC21CAA3A10090C286 /* Tutorial.swift */,
 			);
 			path = Road;
+			sourceTree = "<group>";
+		};
+		0DE9815721CBE9E9003F2FEF /* GameAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				0DE9815B21CBEA23003F2FEF /* GameAnalytics.h */,
+				0DE9815C21CBEA24003F2FEF /* libGameAnalytics.a */,
+			);
+			path = GameAnalytics;
+			sourceTree = "<group>";
+		};
+		0DE9815E21CBEA40003F2FEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DE9816521CBEA60003F2FEF /* SystemConfiguration.framework */,
+				0DE9816321CBEA57003F2FEF /* AdSupport.framework */,
+				0DE9816121CBEA4A003F2FEF /* libz.tbd */,
+				0DE9815F21CBEA40003F2FEF /* libsqlite3.tbd */,
+				07EF1D37FF7498A380B13B31 /* Pods_Skeleton_Ride.framework */,
+				2DE01ECC3E1C39895889ACFF /* Pods_Skeleton_RideTests.framework */,
+				233AC188E2B2423D2046499F /* Pods_Skeleton_RideUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		234CD9E59ABC89C5D9C49E97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				326211970885D0F694670048 /* Pods-Skeleton Ride.debug.xcconfig */,
+				0E171052121A95EBC0C20E00 /* Pods-Skeleton Ride.release.xcconfig */,
+				27EAD46B0319F18C0FD74E39 /* Pods-Skeleton RideTests.debug.xcconfig */,
+				B2916AC974C6DA6809537B52 /* Pods-Skeleton RideTests.release.xcconfig */,
+				5557A28ABE074DB90867C048 /* Pods-Skeleton RideUITests.debug.xcconfig */,
+				F014B3E5B96305E366A9D3D3 /* Pods-Skeleton RideUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,9 +368,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DE38EC520D10224002B9174 /* Build configuration list for PBXNativeTarget "Skeleton Ride" */;
 			buildPhases = (
+				8F8556724DF2BF9FDAD95A15 /* [CP] Check Pods Manifest.lock */,
 				0DE38E9720D10220002B9174 /* Sources */,
 				0DE38E9820D10220002B9174 /* Frameworks */,
 				0DE38E9920D10220002B9174 /* Resources */,
+				E76948FEE5727AE85E317B71 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -272,6 +387,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DE38EC820D10224002B9174 /* Build configuration list for PBXNativeTarget "Skeleton RideTests" */;
 			buildPhases = (
+				4DCF7E2F39E7DD4BF610801B /* [CP] Check Pods Manifest.lock */,
 				0DE38EAD20D10224002B9174 /* Sources */,
 				0DE38EAE20D10224002B9174 /* Frameworks */,
 				0DE38EAF20D10224002B9174 /* Resources */,
@@ -290,6 +406,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DE38ECB20D10224002B9174 /* Build configuration list for PBXNativeTarget "Skeleton RideUITests" */;
 			buildPhases = (
+				6E616033C3F001FDEA9429AE /* [CP] Check Pods Manifest.lock */,
 				0DE38EB820D10224002B9174 /* Sources */,
 				0DE38EB920D10224002B9174 /* Frameworks */,
 				0DE38EBA20D10224002B9174 /* Resources */,
@@ -355,17 +472,24 @@
 				0D27109621C59C93002C79C1 /* Panak_Base_Color.png in Resources */,
 				0D920AD02189C948001B4899 /* spark.png in Resources */,
 				0D27109821C59C93002C79C1 /* Panak_Normal.png in Resources */,
+				0DBB235121C912DD0022ECCB /* Assets.xcassets in Resources */,
 				0D27109721C59C93002C79C1 /* Panak_Height.png in Resources */,
 				0D27109B21C5A332002C79C1 /* normalka.png in Resources */,
+				0D90979F21C6D60B00DF308F /* star.png in Resources */,
+				0DD44B8421C93118007F00D0 /* SF Atarian System.ttf in Resources */,
 				0D27109521C59C93002C79C1 /* Panak_Metallic.png in Resources */,
 				0DE38EA120D10220002B9174 /* art.scnassets in Resources */,
 				0DE38EAB20D10223002B9174 /* LaunchScreen.storyboard in Resources */,
 				0D27109921C59C93002C79C1 /* Panak_Mixed_AO.png in Resources */,
 				0DE38EA820D10223002B9174 /* Assets.xcassets in Resources */,
+				0DBB234C21C905EB0022ECCB /* finger.png in Resources */,
 				0D27109321C59C93002C79C1 /* Panak_Normal_OpenGL.png in Resources */,
+				0DBB235021C912DD0022ECCB /* fireWorks.sks in Resources */,
 				0DE38EA620D10220002B9174 /* Main.storyboard in Resources */,
 				0D27109421C59C93002C79C1 /* Panak_Roughness.png in Resources */,
+				0D90979E21C6D60B00DF308F /* SceneKit Particle System.scnp in Resources */,
 				0D145D5321C15A3600F19B45 /* wood.jpg in Resources */,
+				0DD44B8521C93118007F00D0 /* SF Atarian System Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +509,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4DCF7E2F39E7DD4BF610801B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Skeleton RideTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E616033C3F001FDEA9429AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Skeleton RideUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F8556724DF2BF9FDAD95A15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Skeleton Ride-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E76948FEE5727AE85E317B71 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Skeleton Ride/Pods-Skeleton Ride-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Skeleton Ride/Pods-Skeleton Ride-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0DE38E9720D10220002B9174 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -392,6 +619,7 @@
 			files = (
 				0DE38ECF20D16EEA002B9174 /* Touch.swift in Sources */,
 				0DE38EA320D10220002B9174 /* GameViewController.swift in Sources */,
+				0DF71BBD21CAA3A10090C286 /* Tutorial.swift in Sources */,
 				0DE3FB672107150C006B06A5 /* Figurine.swift in Sources */,
 				0D04B01A21C0133600DCBC3E /* Level.swift in Sources */,
 				0DE38ED120D1AC3A002B9174 /* PhysicsDelegate.swift in Sources */,
@@ -576,48 +804,63 @@
 		};
 		0DE38EC620D10224002B9174 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 326211970885D0F694670048 /* Pods-Skeleton Ride.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LK76GRE9Q3;
+				DEVELOPMENT_TEAM = NR84P5SC4X;
 				INFOPLIST_FILE = AirHockey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sk.deepmind.skeletonride;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirHockey/GameAnalytics",
+				);
+				OTHER_LDFLAGS = "-lC++";
+				PRODUCT_BUNDLE_IDENTIFIER = dummyRide.TomasMacho.sk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GameAnalytics-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		0DE38EC720D10224002B9174 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E171052121A95EBC0C20E00 /* Pods-Skeleton Ride.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LK76GRE9Q3;
+				DEVELOPMENT_TEAM = NR84P5SC4X;
 				INFOPLIST_FILE = AirHockey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sk.deepmind.skeletonride;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirHockey/GameAnalytics",
+				);
+				OTHER_LDFLAGS = "-lC++";
+				PRODUCT_BUNDLE_IDENTIFIER = dummyRide.TomasMacho.sk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GameAnalytics-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		0DE38EC920D10224002B9174 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27EAD46B0319F18C0FD74E39 /* Pods-Skeleton RideTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -639,6 +882,7 @@
 		};
 		0DE38ECA20D10224002B9174 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2916AC974C6DA6809537B52 /* Pods-Skeleton RideTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -660,6 +904,7 @@
 		};
 		0DE38ECC20D10224002B9174 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5557A28ABE074DB90867C048 /* Pods-Skeleton RideUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -680,6 +925,7 @@
 		};
 		0DE38ECD20D10224002B9174 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F014B3E5B96305E366A9D3D3 /* Pods-Skeleton RideUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

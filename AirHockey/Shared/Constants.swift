@@ -11,7 +11,8 @@ import Foundation
 class Constants {
     
     
-    static let blockLength: Float = 20
+    static let blockLength: Float = 24
     static let roadWidth: Float = 20
+    static let maxRepeat: Float = 1
     
 }

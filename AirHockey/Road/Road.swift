@@ -15,6 +15,11 @@ struct space {
     let max: SCNVector3
 }
 
+struct UsedPresets {
+    let folder: Int
+    let block: Int
+}
+
 //PRI GAME OVERI ALEBO GAME WIN OSETRTIT UPLNE PRERUSENIE HRY! idealne vypnut physics contact delegate alebo nieco 
 
 class Road: Randomizator, PhysicsCreator, ScnEffector {
@@ -24,6 +29,16 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
     var sourceFolders: [SCNNode] = []
     
     var LEVEL: Level?
+    //index of block parent in level children array
+    var nodeBlockDict: Dictionary<Int,Int> = [:]
+    var livingNodes: Dictionary<SCNNode,Dictionary<SCNNode,Bool>> = [:]
+    
+    //for not repeating content
+    var usedPresets: [UsedPresets] = []
+    
+    //for maximum 'X' bonuses
+    var crossBonuses: Int = 0
+    
     let user = UserDefaults()
     var rootNode: SCNNode!
     var figurine: SCNNode!
@@ -89,10 +104,24 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
     
     func placeRoad(){
         
+        //umiestnenie road
         if LEVEL != nil {
             rootNode.addChildNode(LEVEL!.level)
         }
         
+        //init dictionaries kvoli bonusom
+        livingNodes = [:]
+
+        for i in LEVEL!.nodeBlockDict {
+          let parent = LEVEL?.level.childNodes[i.key]
+            if livingNodes[parent!] == nil {
+                livingNodes[parent!] = [:]
+            }
+            for i in parent!.childNodes {
+                livingNodes[parent!]![i] = false
+            }
+        }
+
     }
     
     func removeRoad(){
@@ -103,21 +132,24 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
         
       let template = source.rootNode.childNode(withName: "roadTemplate", recursively: true)!.clone()
       
-      let randomLength = CGFloat(randomCislo(rozsah: 30) * Int(Constants.blockLength)) + CGFloat(20 * Constants.blockLength)
+      var randomLength = CGFloat(randomCislo(rozsah: 25) * Int(Constants.blockLength)) + CGFloat(25 * Constants.blockLength)
+        
+        //TUTORIAL
+        if user.retrieveActualLevel() < 26 {
+            randomLength = tutorialRandomLength()
+        }
+        
       //testovanie
       //let randomLength: CGFloat = 60
         
         //zakladna viditelna vrstva
-      let base = SCNNode(geometry: SCNBox(width: 20, height: 0.1, length: randomLength + startBox, chamferRadius: 0))
+       let base = SCNNode(geometry: SCNBox(width: 20, height: 0.1, length: randomLength + startBox, chamferRadius: 0))
         //posuvam o polovicu lebo o polovicu je to uz automaticky posunute
           base.position = SCNVector3(0,-0.1,Float(startBox)/2)
         
           base.name = "base"
           attachStaticBody(base, 0.6, 0.7, 0.1, 0.1, 0.1, 1, 1, 0)
-         //attachSpecificDiffuse(material: (base.geometry?.materials.first)!, rgb: UIColor(red: 1, green: 1, blue: 1, alpha: 1), alpha: 0.3)
         attachCheckboardDiffuse(material: (base.geometry?.materials.first)!, rgb: UIColor(red: 1, green: 1, blue: 1, alpha: 1), alpha: 0.3,blockCount: Float(randomLength)/Constants.blockLength)
-       
-
         
         template.addChildNode(base)
         
@@ -128,7 +160,6 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
           attachDiffuseFromNodeToNode(fromNode: template.childNode(withName: "SMRT", recursively: true)!, toNode: baseWall)
         template.addChildNode(baseWall)
         
-      //  template.childNode(withName: "start", recursively: true)!.position.z = Float(randomLength/2 + 28)
         template.childNode(withName: "end", recursively: true)!.position.z = Float(-randomLength/2 - 2)
 
         //fill and save road
@@ -138,7 +169,7 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
         level.level = template
         level.backgroundColors = randomFarbyPozadie()
 
-        user.saveGeneratedLevel(level: level)
+        user.saveGeneratedLevel(level: level, nodeBlockDict: nodeBlockDict)
     }
 
     //CONTINUE FROM THIS!
@@ -146,27 +177,45 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
 
         let fillingLength = length
         
+        //inicializujem dictionary
+        nodeBlockDict = [:]
+        
+        //array of structs for not repeating selection
+        usedPresets =  []
+        
+        //reset dangerous cross bonuses counter
+        crossBonuses = 0
+
         //na poslednom mieste uz nechcem predmety
         let blocks = Int(fillingLength/Constants.blockLength)
         
         //minimum odkial spawnujem predmety
         let minimum = length/2
+        
+        let lastPalette = user.integer(forKey: "colorPalette")
+        var colorPalette = lastPalette
+        while colorPalette == lastPalette {
+            colorPalette = randomCislo(rozsah: 6)
+        }
+        user.set(colorPalette, forKey: "colorPalette")
+        
+        //0 relativne fadna
+        //1 pekna
+        //2 mierne fadna
+        //3 v pohode
+        //4 mozno moc farebna?
+        //5 fadna ale super!
 
         LEVEL?.level = template
         
         //prechadzam bloky a vyplnam
-        var preseting = 0
+        var switcher = 0
         for i in 1...blocks-1 {
             let min = SCNVector3(-10,0,minimum - Float(i*Int(Constants.blockLength)))
             let max = SCNVector3(10,0,minimum - Float(i*Int(Constants.blockLength)) + Constants.blockLength)
-           // print(min, max)
-            if(preseting == 2){
-                fillBlock(template, min, max, forcedGenerating: true)
-                preseting = 0
-            } else {
-                preseting = preseting + fillBlock(template, min, max,forcedGenerating:  false)
-            }
-            
+           
+            switcher = fillBlock(template, min, max, colorPalette: colorPalette,blockIndex: i, switcher: switcher)
+         
             //generate bonus CIRCLE
             if((i+1) % 5 == 0 && i < blocks-4){
                 generateBonus(template, min, max)
@@ -174,13 +223,92 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
             
         }
         
+        let finalBonus = templates.rootNode.childNode(withName: "finalBonus", recursively: true)!.clone()
+        
+        //first gem for first install
+        if !user.bool(forKey: "firstGem"){
+            
+            finalBonus.position = SCNVector3(x:0,y:-10,z: minimum - Float(blocks*Int(Constants.blockLength)) - 80)
+            
+        } else {
+            
+            //gem not collected but position generated
+            if !user.bool(forKey: "gemCollected"){
+                
+                let randomX: Float = user.float(forKey: "newGemX")
+                let randomY: Float = user.float(forKey: "newGemY")
+                finalBonus.position = SCNVector3(x:randomX,y:-10,z: minimum - Float(blocks*Int(Constants.blockLength)) - 80 - randomY)
+            
+                //gem collected need create another one
+            } else {
+                
+                var randomX: Float = Float(randomCislo(rozsah: 20))
+                if random50na50() {
+                    randomX = -randomX
+                }
+                var randomY: Float = Float(randomCislo(rozsah: 15))
+                if random50na50() {
+                    randomY = -randomY
+                }
+                
+                user.set(randomX, forKey: "newGemX")
+                user.set(randomY, forKey: "newGemY")
+                finalBonus.position = SCNVector3(x:randomX,y:-10,z: minimum - Float(blocks*Int(Constants.blockLength)) - 80 - randomY)
+                user.set(false, forKey: "gemCollected")
+            }
+            
+        }
+        
+        let rotate = SCNAction.rotateBy(x: 0, y: .pi * 2, z: 0, duration: 2)
+        let up = SCNAction.move(by: SCNVector3(x:0,y:3,z:0), duration: 1)
+        up.timingMode = .easeOut
+        let down = SCNAction.move(by: SCNVector3(x:0,y:-3,z:0), duration: 1)
+        down.timingMode = .easeOut
+        let sequence = SCNAction.sequence([up,down])
+        finalBonus.childNode(withName: "bonusDiamond", recursively: true)!.childNode(withName: "diamond", recursively: true)?.runAction(SCNAction.repeatForever(SCNAction.group([sequence,rotate])))
+        template.addChildNode(finalBonus)
         
     }
     
     func generateBonus(_ template: SCNNode,_ min: SCNVector3, _ max: SCNVector3){
         var node: SCNNode!
         
-        let indexBonusu = randomCislo(rozsah: 3) + 1
+        //TUTORIAL
+        if user.retrieveActualLevel() == 1 {
+            return
+        }
+        
+        var indexBonusu: Int!
+        //TUTORIAL
+        let actualLevel = user.retrieveActualLevel()
+        if actualLevel < 10 {
+           indexBonusu = randomCislo(rozsah: 2) + 1
+        } else {
+            if actualLevel < 16 {
+                if crossBonuses == 2 {
+                    indexBonusu = randomCislo(rozsah: 2) + 1
+                } else {
+                    indexBonusu = randomCislo(rozsah: 3) + 1
+                }
+            } else if actualLevel > 15 && actualLevel < 25 {
+                if crossBonuses == 3 {
+                    indexBonusu = randomCislo(rozsah: 2) + 1
+                } else {
+                    indexBonusu = randomCislo(rozsah: 3) + 1
+                }
+            } else {
+                if crossBonuses == 4 {
+                    indexBonusu = randomCislo(rozsah: 2) + 1
+                } else {
+                    indexBonusu = randomCislo(rozsah: 3) + 1
+                }
+            }
+        }
+    
+        if indexBonusu == 3 {
+            crossBonuses += 1
+        }
+        
         node = templates.rootNode.childNode(withName: "bonusCircle" + String(indexBonusu), recursively: true)!.clone()
         
         //position x
@@ -211,66 +339,116 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
         }
     }
     
-    func fillBlock(_ template: SCNNode, _ minimum: SCNVector3, _ maximum: SCNVector3, forcedGenerating: Bool) -> Int {
+    func fillBlock(_ template: SCNNode, _ minimum: SCNVector3, _ maximum: SCNVector3, colorPalette: Int, blockIndex: Int, switcher: Int) -> Int {
         
-        if forcedGenerating {
-            let pocet = randomCislo(rozsah: 3) + 1
-            filling(template, minimum, maximum, pocet)
-            return 0
-        }
-
         let volba = randomCislo(rozsah: 3)
         
-            if volba < 2 {
-                
-                //generovanie
+        switch switcher {
+        //generating
+        case 1:
+            
                 let pocet = randomCislo(rozsah: 3) + 1
-                filling(template, minimum, maximum, pocet)
-                return 0
-                //fillingWithPresets(template, minimum)
+                filling(template, minimum, maximum, pocet, colorPalette)
+                return -1
+        //random choosing
+        case 0:
+            
+            if volba < 2 {
 
+                let pocet = randomCislo(rozsah: 3) + 1
+                filling(template, minimum, maximum, pocet, colorPalette)
+                return -1
+                
             } else {
-
-                //templating
-               // filling(template, minimum, maximum, pocet)
-                fillingWithPresets(template, minimum)
+                
+                fillingWithPresets(template, minimum, colorPalette, blockIndex)
                 return 1
             }
-
+        //random choosing
+        case -1:
             
+            //TUTORIAL, vzdy 2 generovane a 1 blok
+            if user.retrieveActualLevel() < 6 {
+                let pocet = randomCislo(rozsah: 3) + 1
+                filling(template, minimum, maximum, pocet, colorPalette)
+                return -2
+            }
+            
+            if volba < 2 {
+            
+            let pocet = randomCislo(rozsah: 3) + 1
+            filling(template, minimum, maximum, pocet, colorPalette)
+            return -2
+            
+        } else {
+            
+            fillingWithPresets(template, minimum, colorPalette, blockIndex)
+            return 1
+            }
+            
+            
+        // templating
+        case -2:
+            
+            fillingWithPresets(template, minimum, colorPalette, blockIndex)
+            return 1
+            
+        default: return 0
+        }
+
         }
  
-    func fillingWithPresets(_ template: SCNNode, _ minimum: SCNVector3){
+    func fillingWithPresets(_ template: SCNNode, _ minimum: SCNVector3, _ colorPalette: Int, _ blockIndex: Int){
         
         let count = sourceFolders.count
-        let folderIndex = randomCislo(rozsah: UInt32(count))
-        let nodeIndex = randomCislo(rozsah: UInt32(sourceFolders[folderIndex].childNodes.count))
+        var folderIndex: Int!
+        var nodeIndex: Int!
+
+        //osetrenie aby sa predmety neopakovali
+        var repeating = 2
+        while repeating >= 1 {
+            
+            folderIndex = randomCislo(rozsah: UInt32(count))
+            nodeIndex = randomCislo(rozsah: UInt32(sourceFolders[folderIndex].childNodes.count))
+
+            repeating = 0
+            for i in usedPresets {
+                if i.folder == folderIndex && i.block == nodeIndex {
+                    repeating += 1
+                }
+            }
+        }
+        usedPresets.append(UsedPresets(folder: folderIndex, block: nodeIndex))
         
         let node = sourceFolders[folderIndex].childNodes[nodeIndex].clone()
+       
         node.position = SCNVector3(0,0,minimum.z + Constants.blockLength/2)
-        
         for i in node.childNodes {
             //aby sa material skopiroval
             i.geometry = i.geometry?.copy() as? SCNGeometry
-            attachDiffuse(material: (i.geometry?.materials.first)!)
+            attachDiffuse(material: (i.geometry?.materials.first)!, colorPalette: colorPalette)
             i.name = "target"
             attachDynamicBody(i, 1, 1, 0.9, 0.1, 0.1, 0.1, 4)
-          
             
             i.physicsBody?.categoryBitMask = 1
             i.physicsBody?.collisionBitMask = 1
-            
         }
         
         template.addChildNode(node)
+        //ak ma custom block aspon 5 prvkov zaradim do dictionary rodica bloku. nasledne
+        //sa v contacte hitnuty node ocekovat ci jeho otec sa nachadza v dict ak ano ide sa riesit
+        //efekt vybuchnutia
+        if node.childNodes.count > 4 {
+            nodeBlockDict[template.childNodes.count-1] = blockIndex
+        }
         
     }
     
-    func filling(_ template: SCNNode, _ minimum: SCNVector3, _ maximum: SCNVector3, _ count: Int){
+    func filling(_ template: SCNNode, _ minimum: SCNVector3, _ maximum: SCNVector3, _ count: Int, _ colorPalette: Int){
         
         if count == 1 {
             
-            let node = generateNode(template)
+            let node = generateNode(template,colorPalette)
             generatePosition(node: node, min: minimum, max: maximum)
 
             
@@ -280,7 +458,7 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
             if percentualnaSanca(percento: 40) {
                 //vedla seba
                 for _ in 1...count {
-                    nodes.append(generateNode(template))
+                    nodes.append(generateNode(template,colorPalette))
                 }
                 generatePositions(nodes: nodes, min: minimum, max: maximum)
 
@@ -289,7 +467,7 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
                 if count == 2 {
                     
                     for _ in 1...count {
-                        nodes.append(generateNode(template))
+                        nodes.append(generateNode(template, colorPalette))
                     }
                     generatePosition(node: nodes[0], min: minimum, max: maximum)
                     generateStackPosition(baseNode: nodes[0], newNode: nodes[1])
@@ -300,7 +478,7 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
                 } else {
                     
                     for _ in 1...count {
-                        nodes.append(generateNode(template))
+                        nodes.append(generateNode(template, colorPalette))
                     }
 
                     
@@ -329,12 +507,12 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
  
     }
     
-    func generateNode(_ template: SCNNode) -> SCNNode {
+    func generateNode(_ template: SCNNode, _ colorPalette: Int) -> SCNNode {
         
         let node = SCNNode(geometry: generateObject())
         node.name = "target"
         attachDynamicBody(node, 1, 1, 0.9, 0.1, 0.1, 0.1, 4)
-        attachDiffuse(material: (node.geometry?.materials.first)!)
+        attachDiffuse(material: (node.geometry?.materials.first)!, colorPalette: colorPalette)
         node.physicsBody?.categoryBitMask = 1
         node.physicsBody?.collisionBitMask = 1
         template.addChildNode(node)
@@ -472,10 +650,10 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
     }
     
     //pripne material s nahodnou farbou
-    func attachDiffuse(material:SCNMaterial){
+    func attachDiffuse(material:SCNMaterial, colorPalette: Int){
         
         material.lightingModel = .blinn
-        material.diffuse.contents = randomFarbaTarget()
+        material.diffuse.contents = randomFarbaTarget(colorPalette: colorPalette)
         
     }
     
@@ -490,13 +668,13 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
     
     func attachCheckboardDiffuse(material: SCNMaterial, rgb: UIColor, alpha: CGFloat, blockCount: Float){
         
-        if #available(iOS 10.0, *) {
-            material.lightingModel = .physicallyBased
-            material.metalness.contents = 0.1
-            material.roughness.contents = 0.1
-        } else {
+//        if #available(iOS 10.0, *) {
+//            material.lightingModel = .physicallyBased
+//            material.metalness.contents = 0.1
+//            material.roughness.contents = 0.1
+        //} else {
             material.lightingModel = .blinn
-        }
+       // }
         
         material.transparency = alpha
         
@@ -548,3 +726,4 @@ class Road: Randomizator, PhysicsCreator, ScnEffector {
     
 
 }
+

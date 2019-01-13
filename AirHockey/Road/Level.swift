@@ -12,6 +12,7 @@ import SceneKit
 class Level {
     
     var level: SCNNode!
+    var nodeBlockDict: Dictionary<Int,Int>!
     var backgroundColors: backgroundColors!
   
 }

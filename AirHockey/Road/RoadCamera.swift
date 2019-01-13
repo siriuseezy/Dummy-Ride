@@ -17,6 +17,7 @@ extension Road {
         let road = LEVEL?.level.childNode(withName: "base", recursively: true)!.geometry as! SCNBox
         figurine.position = SCNVector3(0,0,Float((road.length - startBox)/2))
         rootNode.addChildNode(figurine)
+        cameraHolder.position.z = figurine.position.z + 28
 
         //sledovanie kamerou
         let action = SCNAction.run{ _ in
@@ -27,7 +28,7 @@ extension Road {
             }
             
             let x = self.figurine.childNode(withName: "chestTop", recursively: true)!.presentation.convertPosition(SCNVector3(0,0,0), to: self.cameraHolder).x
-            self.cameraHolder.eulerAngles.y = -Float(Double.pi/20 * Double(x/10))
+            self.cameraHolder.eulerAngles.y = -Float(Double.pi/20 * Double(x/9))
             self.cameraHolder.position.z += z
             
         }

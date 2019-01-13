@@ -47,11 +47,11 @@ extension GameViewController: dotyk {
         let rightJoin2 = SCNPhysicsBallSocketJoint(bodyA: leftArmTop.physicsBody!, anchorA: SCNVector3(0,-1.5,0), bodyB: leftArmBottom.physicsBody!, anchorB: SCNVector3(0,1.5,0))
 
         
-        let leftLegJoin = SCNPhysicsBallSocketJoint(bodyA: chestBottom.physicsBody!, anchorA: SCNVector3(-0.45,-0.9,0), bodyB: leftLegTop.physicsBody!, anchorB: SCNVector3(0.1, 1.4,0))
+        let leftLegJoin = SCNPhysicsBallSocketJoint(bodyA: chestBottom.physicsBody!, anchorA: SCNVector3(0.5,-0.9,0), bodyB: leftLegTop.physicsBody!, anchorB: SCNVector3(0, 1.4,0))
         let leftLegJoin2 = SCNPhysicsBallSocketJoint(bodyA: leftLegTop.physicsBody!, anchorA: SCNVector3(0,-1.4,0), bodyB: leftLegBottom.physicsBody!, anchorB: SCNVector3(0, 1.4,0))
         
         
-        let rightLegJoin = SCNPhysicsBallSocketJoint(bodyA: chestBottom.physicsBody!, anchorA: SCNVector3(0.45,-0.9,0), bodyB: rightLegTop.physicsBody!, anchorB: SCNVector3(-0.1, 1.4,0))
+        let rightLegJoin = SCNPhysicsBallSocketJoint(bodyA: chestBottom.physicsBody!, anchorA: SCNVector3(-0.5,-0.9,0), bodyB: rightLegTop.physicsBody!, anchorB: SCNVector3(-0, 1.4,0))
         let rightLegJoin2 = SCNPhysicsBallSocketJoint(bodyA: rightLegTop.physicsBody!, anchorA: SCNVector3(0,-1.4,0), bodyB: rightLegBottom.physicsBody!, anchorB: SCNVector3(0, 1.4,0))
         
         let leftFootJoin = SCNPhysicsBallSocketJoint(bodyA: leftLegBottom.physicsBody!, anchorA: SCNVector3(0,-1.25,0), bodyB: leftFoot.physicsBody!, anchorB: SCNVector3(0, 0.3,-0.5))
@@ -85,14 +85,14 @@ extension GameViewController: dotyk {
         removableBehaviours.append(rightJoin)
         removableBehaviours.append(leftLegJoin)
         removableBehaviours.append(rightLegJoin)
-        removableBehDict[leftJoin] = "leftArm"
-        removableBehDict[rightJoin] = "rightArm"
+        removableBehDict[leftJoin] = "rightArm"
+        removableBehDict[rightJoin] = "leftArm"
         removableBehDict[leftLegJoin] = "leftLeg"
         removableBehDict[rightLegJoin] = "rightLeg"
 
-        for i in figurine.childNodes {
-            print(i.physicsBody?.velocity)
-        }
+//        for i in figurine.childNodes {
+//            print(i.physicsBody?.velocity)
+//        }
     }
     
     func changeVelocity(){
@@ -137,12 +137,11 @@ extension GameViewController: dotyk {
             z = 0
         }
         
-        
                         let chestX = countStrength(Float(x*1.2), chestXvalue, -chestXvalue, chestVelocity.x)
-                        let chestZ = countStrength(Float(-z*1.2), chestZValue, -chestZValue, chestVelocity.z, true, true)
+                        let chestZ = countStrength(Float(-z*1.45), chestZValue, -chestZValue, chestVelocity.z, true, true)
         
                         let headY = countStrength(Float(y*1.8), headYvalue, -headYvalue, headVelocity.y)
-                        let headZ = countStrength(Float(-z*1.2), headZvalue, -headZvalue, headVelocity.z, true, true)
+                        let headZ = countStrength(Float(-z*1.45), headZvalue, -headZvalue, headVelocity.z, true, true)
                         let headX = countStrength(Float(x*1.2), headXvalue, -headXvalue, headVelocity.x)
         
                 chestTop.physicsBody?.velocity.z = chestZ
@@ -164,11 +163,12 @@ extension GameViewController: dotyk {
 //            print("MAXIMUM \(strength),\(velocity),\(factor)")
             strength = maximum
         }
-        if zeroCheck {
-            if strength > 0 {
-                strength = velocity
-            }
-        }
+//        if zeroCheck {
+//            if strength > 0 {
+//                print("ZEROCHECK: \(velocity)")
+//                strength = velocity
+//            }
+//        }
         
         return strength
 }
@@ -182,9 +182,9 @@ extension GameViewController: dotyk {
         //helping ball
         if name == "b1"{
             let ball = roadManager.templates.rootNode.childNode(withName: "bonusBall", recursively: true)?.clone()
-            ball?.name = ""
+            ball?.name = "bonusBall"
             ball?.position = cameraHolder.position
-            ball?.position.z -= 3
+            ball?.position.z -= 5
             
             let randY = randomCislo(rozsah: 4)
             var randX = randomCislo(rozsah: 3)
@@ -204,35 +204,37 @@ extension GameViewController: dotyk {
             }
             
             //part of body falling, bad bonus
-        } else {
+        } else if name == "b3" {
             
             for _ in 0...1 {
             let index = randomCislo(rozsah: UInt32(removableBehaviours.count))
+                
             switch removableBehDict[removableBehaviours[index]] {
-            
             case "leftArm":
                 leftArmTop.physicsBody?.contactTestBitMask = 0
                 leftArmBottom.physicsBody?.contactTestBitMask = 0
                 leftHand.physicsBody?.contactTestBitMask = 0
                 break
-            case "RightArm":
+                
+            case "rightArm":
                 rightArmTop.physicsBody?.contactTestBitMask = 0
                 rightArmBottom.physicsBody?.contactTestBitMask = 0
                 rightHand.physicsBody?.contactTestBitMask = 0
                 break
+                
             case "leftLeg":
                 leftLegTop.physicsBody?.contactTestBitMask = 0
                 leftLegBottom.physicsBody?.contactTestBitMask = 0
                 leftFoot.physicsBody?.contactTestBitMask = 0
                 break
+                
             case "rightLeg":
                 rightLegTop.physicsBody?.contactTestBitMask = 0
                 rightLegBottom.physicsBody?.contactTestBitMask = 0
                 rightFoot.physicsBody?.contactTestBitMask = 0
                 break
-            case .none: break
-            
-            case .some(_): break
+                
+            default: break
                 
             }
             
@@ -246,10 +248,15 @@ extension GameViewController: dotyk {
                 scene.physicsWorld.removeAllBehaviors()
                 print("GAME OVER")
                 firstTouch = false
-                gameOver()
+                gameOver(reason: 1)
                 
+            } else {
+                skGame.colorFlare(color: .red, alpha: 0.7, time: 0.3,moveUpside: false)
             }
             
+        } else {
+
+            diamondCollected()
         }
     }
     

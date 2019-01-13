@@ -35,7 +35,8 @@ class MainMenu: SKScene, SKEffector {
     var tutorial: SKLabelNode!
     var highScore: SKLabelNode!
     var actualScore: SKLabelNode!
-    
+    var finger: SKSpriteNode!
+
     var started: Bool = false
     
     //iphone rozmery
@@ -45,7 +46,9 @@ class MainMenu: SKScene, SKEffector {
     override func didMove(to view: SKView) {
 
         self.scaleMode = .aspectFit
+        DispatchQueue.main.async {
         self.view?.isMultipleTouchEnabled = false
+        }
         
         if self.frame.width/self.frame.height < 0.5 {
             iPhoneX = 145
@@ -83,7 +86,8 @@ class MainMenu: SKScene, SKEffector {
       actualLevel.position = CGPoint(x: -170, y: 0)
       levelBar.addChild(actualLevel)
         
-      let lvl = SKLabelNode(fontNamed: "HelveticaNeue")
+//      let lvl = SKLabelNode(fontNamed: "HelveticaNeue")
+        let lvl = SKLabelNode(fontNamed: "SF Atarian System")
           lvl.text = String(user.retrieveActualLevel())
           lvl.name = "lvl"
           lvl.fontSize = 37
@@ -96,7 +100,8 @@ class MainMenu: SKScene, SKEffector {
         futureLevel.position = CGPoint(x: 170, y: 0)
         levelBar.addChild(futureLevel)
         
-        let lvlF = SKLabelNode(fontNamed: "HelveticaNeue")
+//        let lvlF = SKLabelNode(fontNamed: "HelveticaNeue")
+        let lvlF = SKLabelNode(fontNamed: "SF Atarian System")
         lvlF.verticalAlignmentMode = .center
         lvlF.text = String(user.retrieveActualLevel() + 1)
         lvlF.fontSize = 37
@@ -124,20 +129,37 @@ class MainMenu: SKScene, SKEffector {
     
     func initTutorial(){
         
-        tutorial = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+//        tutorial = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        tutorial = SKLabelNode(fontNamed: "SF Atarian System")
         tutorial.verticalAlignmentMode = .center
         tutorial.text = "SWIPE TO MOVE"
-        tutorial.fontSize = 50
+        tutorial.fontSize = 65
         tutorial.position = CGPoint(x:self.frame.midX,y:self.frame.minY + height/8 + iPhoneX)
         self.addChild(tutorial)
         
         blinking(tutorial,0.3)
         
+        finger = SKSpriteNode(imageNamed: "finger")
+        finger.position = CGPoint(x: self.frame.maxX - 100, y: self.frame.minY + height/8 + iPhoneX)
+        finger.setScale(0.5)
+        finger.alpha = 0.6
+        finger.zRotation = .pi/4
+        
+        let move1a = SKAction.move(by: CGVector(dx: 20, dy: 80), duration: 0.5)
+        let move1b = SKAction.move(by: CGVector(dx: -20, dy: -80), duration: 0.5)
+        let move2a = SKAction.move(by: CGVector(dx: 0, dy: 80), duration: 0.5)
+        let move2b = SKAction.move(by: CGVector(dx: 0, dy: -80), duration: 0.5)
+        let move3a = SKAction.move(by: CGVector(dx: -20, dy: 80), duration: 0.5)
+        let move3b = SKAction.move(by: CGVector(dx: 20, dy: -80), duration: 0.5)
+        self.addChild(finger)
+        finger.run(SKAction.repeatForever(SKAction.sequence([move1a,move1b,move2a,move2b,move3a,move3b])))
+        
     }
     
     func initScore(){
         
-        actualScore = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
+//        actualScore = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
+        actualScore = SKLabelNode(fontNamed: "SF Atarian System Bold")
         actualScore.fontSize = 70
         actualScore.verticalAlignmentMode = .center
         actualScore.text = user.getActualScore()
@@ -151,15 +173,14 @@ class MainMenu: SKScene, SKEffector {
         let user = UserDefaults()
         let value = user.integer(forKey: "highScore")
         
-        highScore = SKLabelNode(fontNamed: "HelveticaNeue")
+//        highScore = SKLabelNode(fontNamed: "HelveticaNeue")
+        highScore = SKLabelNode(fontNamed: "SF Atarian System")
         highScore.verticalAlignmentMode = .center
         highScore.text = "TOP: " + String(value)
-        highScore.fontSize = 60
+        highScore.fontSize = 80
         highScore.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - iPhoneX - height/4)
         self.addChild(highScore)
-        
-        
-        
+
     }
 
 }

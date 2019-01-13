@@ -70,7 +70,10 @@ class GameViewController: UIViewController, PhysicsCreator, ScnEffector, Randomi
 
         scnView = self.view as! SCNView
         
- //       user.removeGeneratedLevel()
+        setupScreenSize()
+        
+        //DEVEL
+        //user.removeGeneratedLevel()
         
         skMenu = MainMenu(size: returnSize())
         skMenu.dotykDelegate = self
@@ -85,7 +88,17 @@ class GameViewController: UIViewController, PhysicsCreator, ScnEffector, Randomi
     
     // MARK: on start
     
+    func setupScreenSize(){
+        
+        let screenSizeRatio = user.float(forKey: "screenSizeRatio")
+        if screenSizeRatio == 0 {
+            user.set(self.view.frame.width/self.view.frame.height, forKey: "screenSizeRatio")
+        }
+        
+    }
+    
     func initialSetup(){
+
     scnView.scene = scene
     scnView.scene?.physicsWorld.speed = 2.1
     scnView.allowsCameraControl = false
@@ -121,12 +134,12 @@ class GameViewController: UIViewController, PhysicsCreator, ScnEffector, Randomi
           roadManager.placeRoad()
           self.road = roadManager.LEVEL?.level
           roadManager.placeFigurine()
-        
+     
     }
     
     func returnSize() -> CGSize {
-    
-        if self.view.frame.width/self.view.frame.height < 0.5 {
+
+        if user.float(forKey: "screenSizeRatio") < 0.5 {
             return CGSize(width: 750, height: 1624)
         } else {
             return  CGSize(width: 750, height: 1334)
@@ -194,6 +207,12 @@ extension GameViewController: starter {
          skGame.dotykDelegate = self
          scnView.overlaySKScene = skGame
          runProgressBar()
+        
+         //GAME ANALYTICS
+         let level = Int(skGame.actualLevel.text!)!
+         let score = Int(skGame.actualScore.text!)!
+         GameAnalytics.addProgressionEvent(with: GAProgressionStatusStart, progression01: "game", progression02: "LEVEL" + String(level), progression03: "", score: score)
+        
     }
     
     //ukazovatel progressu
@@ -220,52 +239,104 @@ extension GameViewController: starter {
         
     }
     
-    
-    func gameFinished(){
-        for i in figurine.childNodes{
-            i.physicsBody?.contactTestBitMask = 0
-        }
-        self.firstTouch = false
-        if(skGame.actualScore != nil){
-        user.checkHighScore(score: Int(skGame.actualScore.text!)!)
-        }
-        self.scene.rootNode.removeAction(forKey: "progressBar")
-        isPlaying = false
-        roadManager.cameraHolder.childNode(withName: "camera", recursively: true)!.childNodes[0].name = "NILcameraSMRT"
-    }
-    
-    func gameWin(){
-
-        user.removeGeneratedLevel()
-        gameFinished()
-        skGame.gameWin()
+    //po vyhrati levelu nastane slow down a spusti sa novy level. aj pri zobrati bonusu sa opatovne vykona toto
+    func slowDownAndRunNewLevel(time: TimeInterval){
         
         let run = SCNAction.run({_ in
             
             self.roadManager.removeRoad()
             self.roadManager.levelCompleted()
             self.roadManager.loadRoad(repeatLoad: true)
-  
+            
         })
         
-        let slowDown = SCNAction.customAction(duration: 2) {(nil, elapsedTime) -> () in
-            self.scene.physicsWorld.speed = 2.1 - ((elapsedTime/2) * 2.1)
+        let speed = self.scene.physicsWorld.speed
+        
+        let slowDown = SCNAction.customAction(duration: time) {(nil, elapsedTime) -> () in
+            self.scene.physicsWorld.speed = speed - ((elapsedTime/CGFloat(time)) * speed)
         }
         
-        self.scene.rootNode.runAction(SCNAction.sequence([slowDown,run]))
+        self.scene.rootNode.runAction(SCNAction.sequence([slowDown,run]), forKey: "gameWinScene")
+        
     }
     
-    func gameOver(){
+    func diamondCollected(){
+        skGame.plusDiamond()
+        user.set(true, forKey: "firstGem")
+        user.set(true, forKey: "gemCollected")
         
-        gameFinished()
+        if(skGame.actualScore != nil){
+           user.checkHighScore(score: Int(skGame.actualScore.text!)!)
+        }
+        
+       self.scene.rootNode.removeAction(forKey: "gameWinScene")
+       slowDownAndRunNewLevel(time: 3)
+       
+    }
+    
+    
+    func gameFinished(win: Bool) -> Bool {
+
+        //GAME ANALYTICS
+        let level = Int(skGame.actualLevel.text!)!
+        var score = 0
+        
+        var newHighScore = false
+        self.firstTouch = false
+    
+        if(skGame.actualScore != nil){
+        newHighScore = user.checkHighScore(score: Int(skGame.actualScore.text!)!)
+            score = Int(skGame.actualScore.text!)!
+        }
+        
+        //GAME ANALYTICS
+        if win {
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "game", progression02: "LEVEL" + String(level), progression03: "", score: score)
+        } else {
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "game", progression02: "LEVEL" + String(level), progression03: "", score: score)
+        }
+        
+        
+        
+        self.scene.rootNode.removeAction(forKey: "progressBar")
+        isPlaying = false
+        roadManager.cameraHolder.childNode(withName: "camera", recursively: true)!.childNodes[0].name = "NILcameraSMRT"
+        return newHighScore
+    }
+    
+    func gameWin(){
+        cameraHolder.removeAction(forKey: "following")
+        let move = SCNAction.move(by: SCNVector3(x:0,y:0,z:-20), duration: 1)
+        move.timingMode = .easeOut
+        cameraHolder.runAction(move)
+
+        for i in figurine.childNodes{
+            i.physicsBody?.contactTestBitMask = 128
+        }
+        
+        user.removeGeneratedLevel()
+        gameFinished(win: true)
+        skGame.gameWin()
+        slowDownAndRunNewLevel(time: 4)
+    }
+    
+    func gameOver(reason: Int){
+        
+        for i in figurine.childNodes{
+            i.physicsBody?.contactTestBitMask = 0
+        }
+        
+        let newHighScore = gameFinished(win: false)
         DispatchQueue.main.async{
-        self.skGame.gameover()
+            self.skGame.gameover(newRecord: newHighScore, reason: reason)
         }
         
-        let slowDown = SCNAction.customAction(duration: 2) {(nil, elapsedTime) -> () in
-            self.scene.physicsWorld.speed = 2.1 - ((elapsedTime/2) * 2.1)
+        self.scene.physicsWorld.speed = 0.04
+        let wait = SCNAction.wait(duration: 1.5)
+        let slowDown = SCNAction.customAction(duration: 1.5) {(nil, elapsedTime) -> () in
+            self.scene.physicsWorld.speed = 2.1 - ((elapsedTime/1.5) * 2.1)
         }
-        self.scene.rootNode.runAction(slowDown)
+        self.scene.rootNode.runAction(SCNAction.sequence([wait,slowDown]))
     }
     
     func gameRestart(){
@@ -297,6 +368,9 @@ extension GameViewController: starter {
            
             self.roadManager.placeFigurine()
         
+
     }
 
+
+    
 }

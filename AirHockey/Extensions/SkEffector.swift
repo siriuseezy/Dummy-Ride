@@ -28,11 +28,26 @@ extension SKEffector where Self: SKScene {
         
     }
     
+    func shaking(_ node: SKNode, time: TimeInterval, vector: CGVector,count: Int){
+        
+        let left = SKAction.move(by: vector, duration: time)
+        let right = SKAction.move(by: CGVector(dx: -vector.dx, dy: -vector.dy), duration: time)
+        let shake = SKAction.sequence([left,right])
+        node.run(SKAction.repeat(shake, count: count))
+        
+        
+    }
+    
+    func moveBy(_ node: SKNode,_ vector: CGVector, _ time: TimeInterval){
+        let moveby = SKAction.move(by: vector, duration: time)
+        moveby.timingMode = .easeOut
+        node.run(moveby)
+    }
+    
     func fadeIn(_ node: SKNode, _ time: TimeInterval){
         
         let fadein = SKAction.fadeIn(withDuration: time)
         node.run(fadein)
-        
         
     }
     
